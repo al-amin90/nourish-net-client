@@ -4,10 +4,13 @@ import SideAuth from '../../components/SideAuth';
 import { MdLockOpen } from "react-icons/md";
 import { Link, useNavigate } from 'react-router-dom';
 import facebook from "../../assets/Facebook.png"
+import useAuth from '../../Hooks/useAuth';
+import { toast } from 'react-hot-toast';
 
 
 const Login = () => {
-    const navigate = useNavigate()
+    const { user, singInUser } = useAuth()
+    console.log(user);
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -18,15 +21,22 @@ const Login = () => {
 
 
         const user = { email, password };
-        console.log(user);
+
+        singInUser(email, password)
+            .then(result => {
+                toast.success("Login successfully")
+            })
+            .catch(error => {
+                toast.success(error?.message)
+            })
     }
 
     return (
-        <div className='grid grid-cols-1 gap-5 w-[90%] mx-auto justify-between my-20 max-w-7xl lg:grid-cols-3'>
+        <div className='grid grid-cols-1 gap-0 lg:gap-5 w-[90%] mx-auto justify-between my-20 max-w-7xl lg:grid-cols-3'>
 
-            <div style={{ backgroundImage: `url(${img})` }} className='col-span-2 flex items-center justify-center rounded-lg border shadow-auth bg-cover'
+            <div style={{ backgroundImage: `url(${img})` }} className='col-span-2 mb-8 lg:mb-0  flex items-center justify-center rounded-lg border shadow-auth bg-cover'
             >
-                <div className='text-white w-6/12 bg-white/20 backdrop-blur-md rounded-lg pt-8' >
+                <div className='text-white my-12  w-11/12 md:w-6/12 bg-white/20 backdrop-blur-md rounded-lg pt-8' >
                     <div className="">
                         <h1 className="text-3xl text-center font-bold">Login now!</h1>
                         <p className="text-sm text-center my-3">Welcome Back! Please, Enter your details to Login.</p>

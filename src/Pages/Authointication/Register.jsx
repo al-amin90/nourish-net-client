@@ -5,10 +5,13 @@ import { MdAddPhotoAlternate } from "react-icons/md";
 import { FaRegUser } from "react-icons/fa";
 import { MdLockOpen } from "react-icons/md";
 import { Link, useNavigate } from 'react-router-dom';
+import useAuth from '../../Hooks/useAuth';
+import { updateProfile } from 'firebase/auth';
+import { toast } from 'react-hot-toast';
 
 
 const Register = () => {
-
+    const { createUser } = useAuth()
 
 
     const handleSubmit = e => {
@@ -21,16 +24,30 @@ const Register = () => {
         const photo = form.photo.value;
 
         const user = { name, email, password, photo };
-        console.log(user);
+
+        createUser(email, password)
+            .then(result => {
+                updateProfile(result.user, {
+                    displayName: name,
+                    photoURL: photo
+                })
+                    .then(result => {
+                        toast.success("Register successfully")
+                    })
+                    .catch(error => {
+                        toast.success(error?.message)
+                    })
+            })
+            .catch(error => console.log(error))
     }
 
 
     return (
-        <div className='grid grid-cols-1 gap-5 w-[90%] mx-auto justify-between my-20 max-w-7xl lg:grid-cols-3'>
+        <div className='grid grid-cols-1 gap-0 lg:gap-5 w-[90%] mx-auto justify-between my-20 max-w-7xl lg:grid-cols-3'>
 
-            <div style={{ backgroundImage: `url(${img})` }} className='col-span-2 flex items-center justify-center rounded-lg border shadow-auth bg-cover'
+            <div style={{ backgroundImage: `url(${img})` }} className='col-span-2 mb-8 lg:mb-0 flex items-center justify-center rounded-lg border shadow-auth bg-cover'
             >
-                <div className='text-white w-6/12 bg-white/20 backdrop-blur-md rounded-lg pt-8' >
+                <div className='text-white my-12 w-11/12 md:w-6/12 bg-white/20 backdrop-blur-md rounded-lg pt-8' >
                     <div className="">
                         <h1 className="text-3xl text-center font-bold">Register now!</h1>
                         <p className="text-sm text-center my-3">Welcome!!! Enter your details to register.</p>

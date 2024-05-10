@@ -7,12 +7,23 @@ import { GiFruitBowl } from "react-icons/gi";
 import { VscRequestChanges } from "react-icons/vsc";
 import { FaClockRotateLeft } from "react-icons/fa6";
 import { FiUser } from "react-icons/fi";
+import useAuth from "../Hooks/useAuth";
+import { MdOutlineLogin } from "react-icons/md";
+import { toast } from "react-hot-toast";
 
 const Navbar = () => {
     const navigate = useNavigate()
-    const user = false;
+    const { user, singOutUser } = useAuth()
 
     const theme = "light"
+
+    const handleLogOut = () => {
+        singOutUser()
+            .then(result => {
+                console.log("log out successfully");
+                toast.success("log out successfully")
+            })
+    }
 
 
     const NavLinks = <>
@@ -99,17 +110,34 @@ const Navbar = () => {
                         </div>
 
                         <FaCartPlus className="text-3xl text-[#023022]" />
-                        <div className="avatar online">
-                            <div className="w-11 rounded-full">
-                                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                        {
+                            user ? <div className="dropdown cursor-pointer dropdown-end dropdown-hover">
+                                <div tabIndex={0} role="" className=" m-1">
+                                    <div className="avatar z-50 online">
+                                        <div className="w-11 object-cover rounded-full">
+                                            <img src={user?.photoURL} />
+                                        </div>
+                                    </div>
+                                </div>
+                                <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                                    <li className="pb-4 py-2 px-2 font-bold text-base">{user?.displayName}</li>
+                                    <li onClick={handleLogOut} className="bg-[#023022] rounded-b-2xl text-white rounded-md"><p>Logout <MdOutlineLogin className="text-xl" /></p></li>
+                                </ul>
                             </div>
-                        </div>
+                                :
+                                <div className="">
+                                    <div className="w-11 object-cover rounded-full">
+                                        {/* <img src={user?.photoURL} /> */}
+                                    </div>
+                                </div>
+
+                        }
                     </div>
                 </div>
             </div>
 
             {/* navbar 2 */}
-            <div className=' bg-[#108864] relative z-50'>
+            <div className=' bg-[#108864] relative'>
                 <div className="navbar w-[95%] mx-auto justify-between pt-2 max-w-7xl px-0">
                     <div className="navbar-start lg:hidden">
                         <div className="dropdown">
@@ -132,7 +160,7 @@ const Navbar = () => {
                         user ?
                             <div className="navbar-end  text-xl text-white relative">
                                 <MdMarkEmailUnread />
-                                <p className="text-base ml-3">ijesun30@gmail.com</p>
+                                <p className="text-base ml-3">{user?.email}</p>
                             </div>
                             :
                             <Link
