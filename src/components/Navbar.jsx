@@ -110,7 +110,7 @@ const Navbar = () => {
 
             {/* navbar 2 */}
             <div className=' bg-[#108864] relative z-50'>
-                <div className="navbar w-[95%] mx-auto justify-between mt-1 max-w-7xl px-0">
+                <div className="navbar w-[95%] mx-auto justify-between pt-2 max-w-7xl px-0">
                     <div className="navbar-start lg:hidden">
                         <div className="dropdown">
                             <div tabIndex={0} role="button" className="btn text-white btn-ghost lg:hidden">
