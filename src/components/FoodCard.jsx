@@ -11,7 +11,7 @@ const FoodCard = () => {
 
     return (
         <div className="min-h-full">
-            <div className="card min-h-full rounded-2xl bg-white dark:bg-white/90 card-compact font-open shadow-xl">
+            <div className="card min-h-full rounded-2xl bg-white dark:bg-white/90 card-compact font-open shadow-lg">
                 <figure className="md:h-60 border  h-[250px] rounded-xl bg-contain bg-center bg-no-repeat" style={{ backgroundImage: `url(https://i.postimg.cc/gjpqQgYY/product-16.jpg)` }}>
 
                 </figure>
@@ -44,7 +44,7 @@ const FoodCard = () => {
                         <h3 className="text-md mt-2 font-semibold">Donator:</h3>
 
                         <div className="justify-between text-lg items-center flex">
-                            <h2 className="font-semibold">{user?.displayName}</h2>
+                            <h2 className="font-semibold text-[#108864]">{user?.displayName}</h2>
                             <div className="avatar -mt-4 z-50">
                                 <div className="w-11 object-cover rounded-full">
                                     <img src={user?.photoURL} />
@@ -52,7 +52,7 @@ const FoodCard = () => {
                             </div>
                         </div>
 
-                        <p className="pb-6 mt-2"><span className="font-semibold">Note:</span> Appropriately embrace intermandated resources for impactful scenarios.</p>
+                        <p className="pb-6  mt-2"><span className="font-semibold">Note:</span> Appropriately embrace intermandated resources for impactful scenarios.</p>
                     </div>
 
 
