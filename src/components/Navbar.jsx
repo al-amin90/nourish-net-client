@@ -111,9 +111,9 @@ const Navbar = () => {
 
                         <FaCartPlus className="text-3xl text-[#023022]" />
                         {
-                            user ? <div className="dropdown cursor-pointer dropdown-end dropdown-hover">
+                            user ? <div className="dropdown cursor-pointer  z-50 dropdown-end dropdown-hover">
                                 <div tabIndex={0} role="" className=" m-1">
-                                    <div className="avatar z-50 online">
+                                    <div className="avatar online">
                                         <div className="w-11 object-cover rounded-full">
                                             <img src={user?.photoURL} />
                                         </div>

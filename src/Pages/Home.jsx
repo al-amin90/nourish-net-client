@@ -4,7 +4,7 @@ import Featured from '../components/Featured';
 
 const Home = () => {
     return (
-        <div>
+        <div >
             <Banner></Banner>
             <Featured></Featured>
         </div>

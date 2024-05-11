@@ -7,6 +7,7 @@ import Home from "../Pages/Home";
 import Register from "../Pages/Authointication/Register";
 import Login from "../Pages/Authointication/Login";
 import AvilableFoods from "../Pages/AvilableFoods";
+import AddFood from "../Pages/AddFood";
 
 const router = createBrowserRouter([
     {
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/add-food",
-                element: <Home></Home>
+                element: <AddFood></AddFood>
             },
             {
                 path: "/manage",
