@@ -6,6 +6,7 @@ import MainLayout from "../layout/MainLayout";
 import Home from "../Pages/Home";
 import Register from "../Pages/Authointication/Register";
 import Login from "../Pages/Authointication/Login";
+import AvilableFoods from "../Pages/AvilableFoods";
 
 const router = createBrowserRouter([
     {
@@ -18,7 +19,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/available",
-                element: <Home></Home>
+                element: <AvilableFoods></AvilableFoods>
             },
             {
                 path: "/add-food",
