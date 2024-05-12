@@ -137,7 +137,7 @@ const AddFood = ({ isUpdate }) => {
                                     ● Food URL
                                 </label>
                                 <input
-                                    defaultValue={isUpdate && food?.foodURL}
+                                    defaultValue={food?.foodURL || ""}
                                     id="username"
                                     name="foodURL"
                                     placeholder="Food URL"

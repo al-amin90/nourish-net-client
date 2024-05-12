@@ -43,7 +43,7 @@ const AvilableFoods = () => {
                         <button type='submit' className='py-2 px-5 hover:bg-[#023022]/85 bg-[#023022] text-white rounded-full absolute right-0'>Search</button>
                     </form>
                     <div className='flex lg:mx-24 mx-6 md:mt-0 mt-5 items-center gap-3 justify-center'>
-                        <p>Sort By Expire Date:</p>
+                        <p>Sort By:</p>
                         <select
                             data-tooltip-id="my-tooltip"
                             data-tooltip-content="Sort By Quantaty"
@@ -51,6 +51,7 @@ const AvilableFoods = () => {
                             onChange={(e) => setSort(e.target.value)}
                             name="sort"
                             className="py-2 px-3 rounded-full font-semibold border border-[#023022] text-[#023022] select-info w-48 max-w-xs">
+                            <option defaultValue=""> Expire Date</option>
                             <option defaultValue="Descending Order"> Descending Order</option>
                             <option defaultValue="Ascending Order"> Ascending Order</option>
                         </select>

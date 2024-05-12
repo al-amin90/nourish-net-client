@@ -12,12 +12,14 @@ import ManageFood from "../Pages/ManageFood";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import FoodDetails from "../Pages/FoodDetails";
 import FoodReqest from "../Pages/FoodReqest";
+import ErrorPage from "../Pages/ErrorPage";
 const axiosSecure = useAxiosSecure()
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <MainLayout></MainLayout>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 index: true,
@@ -37,7 +39,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/food-request",
-                element: <FoodReqest></FoodReqest>
+                element: <PrivateRouter><FoodReqest></FoodReqest></PrivateRouter>
             },
             {
                 path: "/login",
@@ -53,7 +55,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/food/:id",
-                element: <FoodDetails></FoodDetails>,
+                element: <PrivateRouter><FoodDetails></FoodDetails></PrivateRouter>,
                 loader: ({ params }) => axiosSecure.get(`/food/${params.id}`)
             }
         ]

@@ -1,17 +1,12 @@
 import { HashLoader } from 'react-spinners'
+import loader from "../assets/loader.gif"
 
 const Loader = () => {
     return (
         <div>
-            <div className='flex justify-center items-center w-full min-h-[calc(100vh-180px)]'>
+            <div className='flex bg-black  justify-center items-center w-full min-h-[calc(100vh-180px)]'>
 
-                <HashLoader
-                    color="#108864"
-                    cssOverride={{}}
-                    loading
-                    size={70}
-                    speedMultiplier={5}
-                />
+                <img className='object-cover' src={loader} alt="" />
             </div>
         </div>
     );
