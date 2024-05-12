@@ -8,7 +8,7 @@ const FoodCard = ({ food }) => {
     const navigate = useNavigate()
     const { user } = useAuth()
     const { donateUser, expiredDate,
-        foodName, foodQuantity, foodURL, locationPickup, note, statusFood } = food;
+        foodName, foodQuantity, foodURL, locationPickup, note, _id } = food;
 
     return (
         <div className="min-h-full">
@@ -36,7 +36,7 @@ const FoodCard = ({ food }) => {
                         <span className="text-black/90   ml-3">{new Date(expiredDate).toLocaleDateString()}</span>
                     </div>
                     <div className="flex items-center justify-between pb-5">
-                        <button onClick={() => navigate(`/spot/${`spot?._id`}`)} className="py-2 px-5 text-base border-2 border-[#303544] duration-300 text-[#303544] hover:scale-105 hover:-rotate-2 rounded-full flex items-center gap-2 hover:shadow-xl font-semibold">Details <FaArrowRight /></button>
+                        <button onClick={() => navigate(`/food/${_id}`)} className="py-2 px-5 text-base border-2 border-[#303544] duration-300 text-[#303544] hover:scale-105 hover:-rotate-2 rounded-full flex items-center gap-2 hover:shadow-xl font-semibold">Details <FaArrowRight /></button>
 
 
                     </div>

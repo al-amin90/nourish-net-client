@@ -10,6 +10,7 @@ import AddFood from "../Pages/AddFood";
 import PrivateRouter from "./PrivateRouter";
 import ManageFood from "../Pages/ManageFood";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
+import FoodDetails from "../Pages/FoodDetails";
 const axiosSecure = useAxiosSecure()
 
 const router = createBrowserRouter([
@@ -48,6 +49,11 @@ const router = createBrowserRouter([
             {
                 path: "/update/:id",
                 element: <PrivateRouter><AddFood isUpdate={true}></AddFood></PrivateRouter>
+            },
+            {
+                path: "/food/:id",
+                element: <FoodDetails></FoodDetails>,
+                loader: ({ params }) => axiosSecure.get(`/food/${params.id}`)
             }
         ]
     },
