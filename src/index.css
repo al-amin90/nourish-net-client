@@ -19,3 +19,7 @@ body{
 .shadow-auth{
     box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
 }
+
+.ant-modal-footer{
+    display: none;
+}

@@ -1,8 +1,8 @@
 import addImg from "../assets/banner.jpg";
 import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
-
 import "react-datepicker/dist/react-datepicker.css";
+
 import useAuth from "../Hooks/useAuth";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { toast } from "react-hot-toast";
@@ -61,7 +61,7 @@ const AddFood = ({ isUpdate }) => {
         console.log(food);
 
         if (isUpdate) {
-            axiosSecure.patch(`/food/${id}`, food).then((res) => {
+            axiosSecure.put(`/food/${id}`, food).then((res) => {
                 console.log(res.data);
                 if (res.data.modifiedCount > 0) {
                     toast.success("Food have been Updated");

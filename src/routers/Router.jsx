@@ -11,6 +11,7 @@ import PrivateRouter from "./PrivateRouter";
 import ManageFood from "../Pages/ManageFood";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import FoodDetails from "../Pages/FoodDetails";
+import FoodReqest from "../Pages/FoodReqest";
 const axiosSecure = useAxiosSecure()
 
 const router = createBrowserRouter([
@@ -36,7 +37,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/food-request",
-                element: <Home></Home>
+                element: <FoodReqest></FoodReqest>
             },
             {
                 path: "/login",
