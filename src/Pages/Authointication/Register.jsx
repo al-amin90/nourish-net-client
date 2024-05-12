@@ -8,11 +8,17 @@ import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../../Hooks/useAuth';
 import { updateProfile } from 'firebase/auth';
 import { toast } from 'react-hot-toast';
+import Loader from '../../utlis/Loader';
+import { useEffect } from 'react';
 
 
 const Register = () => {
-    const { createUser } = useAuth()
+    const { createUser, user, setUser, setLoading, loading } = useAuth()
+    const navigate = useNavigate()
 
+    useEffect(() => {
+        if (user) return navigate('/')
+    }, [user])
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -31,17 +37,17 @@ const Register = () => {
                     displayName: name,
                     photoURL: photo
                 })
-                    .then(result => {
-                        toast.success("Register successfully")
-                    })
-                    .catch(error => {
-                        toast.success(error?.message)
-                    })
+                setUser({ ...user, displayName: name, photoURL: photo })
+                navigate('/')
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                console.log(error)
+                setLoading(false)
+                toast.error(error.message)
+            })
     }
 
-
+    if (user || loading) return <Loader></Loader>
     return (
         <div className='grid grid-cols-1 gap-0 lg:gap-5 w-[90%] mx-auto justify-between my-20 max-w-7xl lg:grid-cols-3'>
 

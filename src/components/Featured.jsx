@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import FoodCard from './FoodCard';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { baseURL } from '../utlis/baseURL';
 
 const Featured = () => {
     const [foods, setFoods] = useState(null)
@@ -10,7 +11,7 @@ const Featured = () => {
 
     useEffect(() => {
         const getData = async () => {
-            const { data } = await axios.get(`https://nourish-net-server-eight.vercel.app/foods`)
+            const { data } = await axios.get(`${baseURL}/foodsAcc`)
             setFoods(data);
         };
 
@@ -30,7 +31,7 @@ const Featured = () => {
 
                 <div className="grid lg:grid-cols-3 mt-16 md:grid-cols-2 grid-cols-1  gap-7">
                     {
-                        foods?.slice(0, 6).map(food => <FoodCard key={food._id}></FoodCard>)
+                        foods?.slice(0, 6).map(food => <FoodCard food={food} key={food._id}></FoodCard>)
                     }
 
                 </div>

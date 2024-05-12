@@ -2,20 +2,28 @@ import img from '../../assets/register.jpg';
 import { MdOutlineMailOutline } from "react-icons/md";
 import SideAuth from '../../components/SideAuth';
 import { MdLockOpen } from "react-icons/md";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import facebook from "../../assets/Facebook.png"
 import useAuth from '../../Hooks/useAuth';
 import { toast } from 'react-hot-toast';
+import Loader from '../../utlis/Loader';
+import { useEffect } from 'react';
 
 
 const Login = () => {
-    const { user, singInUser, singInWithGoogle } = useAuth()
-    console.log(user);
+    const { user, loading, setLoading, singInUser, singInWithGoogle } = useAuth()
+    const location = useLocation()
+    const navigate = useNavigate()
+    console.log(location);
+
+    useEffect(() => {
+        if (user) return navigate('/')
+    }, [user])
 
     const handleGoogle = () => {
         singInWithGoogle()
             .then(result => {
-                console.log(result.user);
+                navigate(location.state || "/")
                 toast.success("Login successfully")
             })
             .catch(error => {
@@ -25,7 +33,7 @@ const Login = () => {
     const handleGithub = () => {
         singInWithGoogle()
             .then(result => {
-                console.log(result.user);
+                navigate(location.state || "/")
                 toast.success("Login successfully")
             })
             .catch(error => {
@@ -41,16 +49,18 @@ const Login = () => {
         const password = form.password.value;
 
 
-        const user = { email, password };
-
         singInUser(email, password)
             .then(result => {
                 toast.success("Login successfully")
+                navigate(location.state || "/")
             })
             .catch(error => {
-                toast.success(error?.message)
+                setLoading(false)
+                toast.error(error?.message)
             })
     }
+    console.log(user, loading);
+    if (user || loading) return <Loader></Loader>
 
     return (
         <div className='grid grid-cols-1 gap-0 lg:gap-5 w-[90%] mx-auto justify-between my-20 max-w-7xl lg:grid-cols-3'>
