@@ -3,8 +3,8 @@ import imageBG from '../assets/giphy.gif';
 
 const Services = () => {
     return (
-        <div className='bg-contain mt-32 flex max-w-7xl mx-auto w-[95%] md:w-[85%]  justify-between'>
-            <div className="mt-28  font-outfit">
+        <div className='bg-contain mt-32 flex items-center max-w-7xl mx-auto w-[95%] md:w-[85%]  justify-between'>
+            <div className="  font-outfit">
 
                 <div>
                     <p className='text-[#108864] font-bold mb-4'>____________----____</p>

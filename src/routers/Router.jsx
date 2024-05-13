@@ -55,8 +55,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/food/:id",
-                element: <PrivateRouter><FoodDetails></FoodDetails></PrivateRouter>,
-                loader: ({ params }) => axiosSecure.get(`/food/${params.id}`)
+                element: <PrivateRouter><FoodDetails></FoodDetails></PrivateRouter>
             }
         ]
     },
