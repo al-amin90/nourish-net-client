@@ -6,6 +6,8 @@ import { toast } from 'react-hot-toast';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import Loader from '../utlis/Loader';
 import Swal from 'sweetalert2';
+import Lottie from "lottie-react";
+import add from "../assets/add.json"
 
 const ManageFood = () => {
     const { user } = useAuth()
@@ -73,13 +75,17 @@ const ManageFood = () => {
     if (isLoading) return <Loader></Loader>
     return (
         <div>
-            <section className="container mb-24 px-4 mx-auto pt-12">
-                <div className="flex items-center gap-x-3">
-                    <h2 className="text-lg font-medium text-gray-800 ">My Foods</h2>
+            <section className="container mb-24 px-4 mx-auto ">
+                <div className='flex justify-between items-end'>
 
-                    <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full ">
-                        {foods?.length} foods
-                    </span>
+                    <div className="flex items-center gap-x-3">
+                        <h2 className="text-lg font-medium text-gray-800 ">My Foods</h2>
+
+                        <span className="px-3 py-1 text-xs text-[#108864] bg-[#1088643b] rounded-full ">
+                            {foods?.length} foods
+                        </span>
+                    </div>
+                    <Lottie className='w-36 relative top-8 right-6' animationData={add}></Lottie>
                 </div>
 
                 <div className="flex flex-col mt-6">
@@ -162,7 +168,7 @@ const ManageFood = () => {
                                                     <div className="flex items-center gap-x-6">
 
 
-                                                        <Link to={`/update/${food._id}`} className="text-black/80 transition-colors duration-200   hover:text-yellow-500 focus:outline-none">
+                                                        <Link to={`/update/${food._id}`} className="text-black/80 transition-colors bg-[#108864] p-1 rounded-full text-white duration-200   hover:text-yellow-500 focus:outline-none">
                                                             <svg
                                                                 xmlns="http://www.w3.org/2000/svg"
                                                                 fill="none"

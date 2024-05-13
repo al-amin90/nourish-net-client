@@ -159,7 +159,7 @@ const Navbar = () => {
                     {
                         user ?
                             <div className="navbar-end  text-xl text-white relative">
-                                <MdMarkEmailUnread />
+                                <MdMarkEmailUnread className="text-xl" />
                                 <p className="text-base ml-3">{user?.email}</p>
                             </div>
                             :

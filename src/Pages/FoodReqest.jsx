@@ -4,6 +4,10 @@ import useAuth from '../Hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
 import Loader from '../utlis/Loader';
 
+import Lottie from "lottie-react";
+import box from "../assets/box.json"
+
+
 const FoodReqest = () => {
     const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
@@ -27,13 +31,16 @@ const FoodReqest = () => {
     if (isLoading) return <Loader></Loader>
     return (
         <div>
-            <section className="container mb-24 px-4 mx-auto pt-12">
-                <div className="flex items-center gap-x-3">
-                    <h2 className="text-lg font-medium text-gray-800 ">food Requests</h2>
+            <section className="container mb-24 px-4 mx-auto pt-4">
+                <div className='flex justify-between items-end'>
+                    <div className="flex items-center gap-x-3">
+                        <h2 className="text-lg font-medium text-gray-800 ">Food Requests:</h2>
 
-                    <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full ">
-                        {foods?.length} Requests
-                    </span>
+                        <span className="px-3 py-1 text-xs text-[#108864] bg-[#1088643b] rounded-full ">
+                            {foods?.length} Requests
+                        </span>
+                    </div>
+                    <Lottie className='w-36 relative top-6' animationData={box}></Lottie>
                 </div>
 
                 <div className="flex flex-col mt-6">

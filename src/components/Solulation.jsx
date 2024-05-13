@@ -2,9 +2,13 @@ import solution from "../assets/family.jpeg"
 import { Link } from 'react-router-dom';
 import bgSolu from "../assets/bgSolu.png"
 
+import Lottie from "lottie-react";
+import circle from "../assets/lottie.json"
+
 const Solulation = () => {
     return (
-        <div className="bg-no-repeat mt-28 bg-contain" style={{ backgroundImage: `url(${bgSolu})` }}>
+        <div className="bg-no-repeat relative mt-32 bg-contain" style={{ backgroundImage: `url(${bgSolu})` }}>
+            <Lottie className='w-48 absolute -top-40 right-20' animationData={circle}></Lottie>
             <div className='max-w-7xl mx-auto w-[95%] md:w-[85%]'>
                 <div className="hero py-28">
                     <div className="grid grid-cols-1 lg:grid-cols-2">

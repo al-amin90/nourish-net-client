@@ -5,7 +5,8 @@ import FoodCard from '../components/FoodCard';
 import { baseURL } from '../utlis/baseURL';
 import { TbLayoutCards } from "react-icons/tb";
 import { motion } from 'framer-motion'
-
+import Lottie from "lottie-react";
+import open from "../assets/avilable.json"
 
 const AvilableFoods = () => {
     const [foods, setFoods] = useState(null)
@@ -35,10 +36,13 @@ const AvilableFoods = () => {
         <div>
             <div className='py-4 mb-24 w-[90%] md:w-[93%] font-outfit mx-auto max-w-7xl px-0'>
 
-                <div className='text-left font-mons mt-12 md:mt-20'>
-                    <h2 className='font-bold text-4xl mb-3'><span className='text-[#108864]'>All</span> Available Foods</h2>
-                    <p className='mb-6 max-w-3xl'>
-                        Welcome to the All Available Foods page on NourishNet! You'll find a bounty of delicious offerings waiting to be shared. This page is the heart of our platform, where food surplus meets those in need, fostering a community of generosity and compassion.</p>
+                <div className='flex items-center justify-between'>
+                    <div className='text-left font-mons mt-12 md:mt-20'>
+                        <h2 className='font-bold text-4xl mb-3'><span className='text-[#108864]'>All</span> Available Foods</h2>
+                        <p className='mb-6 max-w-3xl'>
+                            Welcome to the All Available Foods page on NourishNet! You'll find a bounty of delicious offerings waiting to be shared. This page is the heart of our platform, where food surplus meets those in need, fostering a community of generosity and compassion.</p>
+                    </div>
+                    <Lottie className='relative top-8 right-8' style={{ width: "250px" }} animationData={open}></Lottie>
                 </div>
 
                 <motion.div
