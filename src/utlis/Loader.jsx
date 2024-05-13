@@ -6,7 +6,7 @@ const Loader = () => {
         <div>
             <div className='flex bg-black  justify-center items-center w-full min-h-[calc(100vh-180px)]'>
 
-                <img className='object-cover' src={loader} alt="" />
+                <img className='object-contain' src={loader} alt="" />
             </div>
         </div>
     );

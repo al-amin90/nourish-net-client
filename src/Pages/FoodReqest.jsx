@@ -1,18 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
 import useAuth from '../Hooks/useAuth';
+import { useQuery } from '@tanstack/react-query';
+import Loader from '../utlis/Loader';
 
 const FoodReqest = () => {
     const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
-    const [foods, setFoods] = useState()
-    console.log(user);
+    // const [foods, setFoods] = useState()
 
-    useEffect(() => {
-        axiosSecure.get(`/foodss?email=${user.email}&requ=requested`)
-            .then(res => setFoods(res.data))
-    }, [user])
+    const { data: foods = [], isLoading } = useQuery({
+        queryKey: ["food-request"],
+        queryFn: async () => {
+            const { data } = await axiosSecure.get(`/foodss?email=${user.email}&requ=requested`);
+            return data
+        }
+    })
+
     console.log(foods);
+    // useEffect(() => {
+    //     axiosSecure.get(`/foodss?email=${user.email}&requ=requested`)
+    //         .then(res => setFoods(res.data))
+    // }, [user])
+    // console.log(foods);
+
+    if (isLoading) return <Loader></Loader>
     return (
         <div>
             <section className="container px-4 mx-auto pt-12">

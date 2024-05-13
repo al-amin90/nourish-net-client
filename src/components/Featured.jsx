@@ -3,22 +3,31 @@ import FoodCard from './FoodCard';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { baseURL } from '../utlis/baseURL';
+import { useQuery } from '@tanstack/react-query';
+import Loader from '../utlis/Loader';
 
 const Featured = () => {
-    const [foods, setFoods] = useState(null)
+    // const [foods, setFoods] = useState(null)
     const navigate = useNavigate()
 
-
-    useEffect(() => {
-        const getData = async () => {
+    const { data: foods = [], isLoading } = useQuery({
+        queryKey: ["featured-food"],
+        queryFn: async () => {
             const { data } = await axios.get(`${baseURL}/foodsAcc`)
-            setFoods(data);
-        };
+            return data;
+        }
+    })
+    console.log(foods);
 
+    // useEffect(() => {
+    //     const getData = async () => {
+    //         const { data } = await axios.get(`${baseURL}/foodsAcc`)
+    //         setFoods(data);
+    //     };
+    //     getData()
+    // }, [])
 
-        getData()
-    }, [])
-
+    if (isLoading) return <Loader></Loader>
     return (
         <div>
             <div className='py-4 w-[90%] md:w-[93%] font-outfit mx-auto max-w-7xl px-0'>
@@ -31,7 +40,7 @@ const Featured = () => {
 
                 <div className="grid lg:grid-cols-3 mt-16 md:grid-cols-2 grid-cols-1  gap-7">
                     {
-                        foods?.slice(0, 6).map(food => <FoodCard food={food} key={food._id}></FoodCard>)
+                        foods?.slice(0, 6)?.map(food => <FoodCard food={food} key={food._id}></FoodCard>)
                     }
 
                 </div>

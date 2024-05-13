@@ -1,5 +1,5 @@
 import { FaLocationDot } from "react-icons/fa6";
-import { useLoaderData, useNavigate } from 'react-router-dom';
+import { useLoaderData, useNavigate, useParams } from 'react-router-dom';
 import { GiFruitBowl } from "react-icons/gi";
 import { LuClock } from "react-icons/lu";
 import { LuPartyPopper } from "react-icons/lu";
@@ -10,20 +10,45 @@ import "react-datepicker/dist/react-datepicker.css";
 import useAuth from "../Hooks/useAuth";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { toast } from "react-hot-toast";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import Loader from "../utlis/Loader";
 
 const FoodDetails = () => {
     const [startDate, setStartDate] = useState(new Date());
-    const { data } = useLoaderData()
+    // const { data } = useLoaderData()
     const { user } = useAuth()
     const navigate = useNavigate()
     const [modal2Open, setModal2Open] = useState(false);
     const axiosSecure = useAxiosSecure()
-    const food = data;
+    const { id } = useParams()
 
+
+    const { data = [], refetch, isLoading } = useQuery({
+        queryKey: ["food-Details"],
+        queryFn: async () => {
+            const { data } = await axiosSecure.get(`/food/${id}`)
+            return data
+        }
+    })
+    const food = data;
     console.log(data);
 
 
-    const handleSubmit = e => {
+    const { mutateAsync } = useMutation({
+        mutationFn: async ({ id, food }) => {
+            const { data } = await axiosSecure.put(`/food/${id}`, food)
+            return data
+        },
+        onSuccess: () => {
+            console.log("wow data update");
+
+            toast.success("Your Request has Confirmed");
+            setModal2Open(false)
+            refetch()
+        }
+    })
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
         const form = e.target;
 
@@ -50,19 +75,22 @@ const FoodDetails = () => {
             donateUser,
             requestedDate
         };
-        console.log(data._id);
+        const id = data._id;
 
-        axiosSecure.put(`/food/${data._id}`, food).then((res) => {
-            console.log(res.data);
-            if (res.data.modifiedCount > 0) {
-                toast.success("Your Request has Confirmed");
-                setModal2Open(false)
-                // navigate("/manage");
-            }
-        });
 
+        await mutateAsync({ id, food })
+
+        // axiosSecure.put(`/food/${data._id}`, food).then((res) => {
+        //     console.log(res.data);
+        //     if (res.data.modifiedCount > 0) {
+        //         toast.success("Your Request has Confirmed");
+        //         setModal2Open(false)
+        //         // navigate("/manage");
+        //     }
+        // });
     }
 
+    if (isLoading) return <Loader></Loader>
     return (
         <div className='bg-[#F4F4F4]'>
             <div className='max-w-7xl grid py-24 mb-12 grid-cols-1 lg:grid-cols-3 mx-auto w-[90%]  md:w-[85%]'>
@@ -101,7 +129,9 @@ const FoodDetails = () => {
                         <div className="px-6 flex items-center justify-end mt-4">
                             {/* <button className="">Request </button> */}
 
-                            <Button className="py-4 px-5 text-base border-2 border-[#303544] hover:text-[#303544] text-white duration-300 hover:bg-white bg-[#303544] rounded-full flex items-center gap-2 hover:shadow-xl font-medium" onClick={() => setModal2Open(true)}>
+                            <Button
+                                disabled={food?.statusFood === "requested"}
+                                className="py-4 px-5 text-base border-2 border-[#303544] hover:text-[#303544] text-white duration-300 hover:bg-white bg-[#303544] rounded-full flex items-center gap-2 hover:shadow-xl font-medium" onClick={() => setModal2Open(true)}>
                                 Request
                             </Button>
                             <Modal
@@ -276,7 +306,8 @@ const FoodDetails = () => {
                                             />
                                         </div>
                                     </div>
-                                    <div className="flex items-center justify-end mt-4">
+                                    <div
+                                        className="flex items-center justify-end mt-4">
                                         <button className="py-2 bg-[#2BA2FF] px-5 text-base border-2 border-white duration-300 text-white hover:scale-105 hover:-rotate-2 rounded-full flex items-center gap-2 hover:shadow-xl font-semibold">
                                             Confirm
                                         </button>

@@ -1,32 +1,60 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { baseURL } from '../utlis/baseURL';
 import useAuth from '../Hooks/useAuth';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import Loader from '../utlis/Loader';
 
 const ManageFood = () => {
     const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
-    const [foods, setFoods] = useState()
+    // const [foods, setFoods] = useState()
 
-    useEffect(() => {
-        axiosSecure.get(`/foodss?email=${user.email}`)
-            .then(res => setFoods(res.data))
-    }, [user])
+    const { data: foods = [], isLoading, isError, refetch, error } = useQuery({
+        queryKey: ['food-manage'],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/foodss?email=${user.email}`)
+            return res.data;
+        }
+    })
+    console.log(foods);
 
-    const handleDelete = id => {
-        axiosSecure.delete(`/food/${id}`)
-            .then(res => {
-                console.log(res.data);
-                if (res.data.deletedCount > 0) {
-                    toast.success("Your Food has been Delete");
-                }
-            })
+
+    // useEffect(() => {
+    //     axiosSecure.get(`/foodss?email=${user.email}`)
+    //         .then(res => setFoods(res.data))
+    // }, [user])
+
+
+    // mutation on --- delete
+
+    const { mutateAsync } = useMutation({
+        mutationFn: async (id) => {
+            const { data } = await axiosSecure.delete(`/food/${id}`)
+            console.log(data);
+            return data;
+        },
+
+        onSuccess: () => {
+            toast.success("Your Food has been Delete");
+            refetch()
+        }
+    })
+
+    const handleDelete = async (id) => {
+        await mutateAsync(id)
+
+        // axiosSecure.delete(`/food/${id}`)
+        //     .then(res => {
+        //         console.log(res.data);
+        //         if (res.data.deletedCount > 0) {
+        //             toast.success("Your Food has been Delete");
+        //         }
+        //     })
     }
 
-
+    if (isLoading) return <Loader></Loader>
     return (
         <div>
             <section className="container px-4 mx-auto pt-12">
