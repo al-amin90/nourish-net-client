@@ -3,7 +3,7 @@
 const Footer = () => {
     return (
         <div className='bg-[#1D2835] font-outfit text-white'>
-            <footer className="py-12 max-w-7xl  mx-auto w-[90%] ">
+            <footer className="pt-28 pb-10 max-w-7xl  mx-auto w-[90%] ">
                 <div className="container px-6 mx-auto space-y-6 md:space-y-12">
                     <div className="grid lg:grid-cols-12 gap-10 md:gap-20">
                         <div className="pb-6 md:pb-0 md:col-span-4">
@@ -66,7 +66,7 @@ const Footer = () => {
                                 </li>
 
                             </ul>
-                            <label className="border border-white input hidden md:flex px-3 w-60 relative rounded-md mt-10 bg-transparent input-bordered items-center gap-2">
+                            <label className="border border-white input hidden md:flex px-3 w-full relative rounded-md mt-10 bg-transparent input-bordered items-center gap-2">
                                 <input type="text" className="grow text-sm rounded-full outline-none h-full" placeholder="Your Email" />
                                 <button className='px-5 absolute text-sm right-0 h-full bg-[#023022] text-white hover:bg-[#023022]/85 rounded-md'>Email</button>
                             </label>
