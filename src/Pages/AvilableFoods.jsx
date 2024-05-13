@@ -9,6 +9,7 @@ const AvilableFoods = () => {
     const [foods, setFoods] = useState(null)
     const [sort, setSort] = useState('')
     const [search, setSearch] = useState('')
+    const [layout, setLayout] = useState(false)
 
     useEffect(() => {
         const getData = async () => {
@@ -26,6 +27,7 @@ const AvilableFoods = () => {
         setSearch(text)
         e.target.reset()
     }
+    console.log(layout);
 
     return (
         <div>
@@ -45,9 +47,6 @@ const AvilableFoods = () => {
                     <div className='flex lg:mx-24 mx-6 md:mt-0 mt-5 items-center gap-3 justify-center'>
                         <p>Sort By:</p>
                         <select
-                            data-tooltip-id="my-tooltip"
-                            data-tooltip-content="Sort By Quantaty"
-                            data-tooltip-place="top"
                             onChange={(e) => setSort(e.target.value)}
                             name="sort"
                             className="py-2 px-3 rounded-full font-semibold border border-[#023022] text-[#023022] select-info w-48 max-w-xs">
@@ -58,7 +57,11 @@ const AvilableFoods = () => {
                     </div>
                 </div>
 
-                <div className="grid lg:grid-cols-3 mt-16 md:grid-cols-2 grid-cols-1  gap-7">
+                <div className='hidden lg:flex items-center justify-end md:mr-24 mt-6 gap-2'>
+                    <p>Change layout:</p>
+                    <button className=' py-2 px-6 rounded-full hover:scale-105 duration-300 text-white font-semibold border bg-[#023022] hover:bg-[#303544] ' onClick={() => setLayout(!layout)}>Layout {layout ? "||" : "|||"}</button>
+                </div>
+                <div className={`grid ${layout ? "lg:grid-cols-2" : "lg:grid-cols-3"} mt-16 md:grid-cols-2 grid-cols-1  gap-7`}>
                     {
                         foods?.map(food => <FoodCard food={food} key={food._id}></FoodCard>)
                     }

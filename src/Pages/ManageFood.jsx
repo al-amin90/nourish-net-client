@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import Loader from '../utlis/Loader';
+import Swal from 'sweetalert2';
 
 const ManageFood = () => {
     const { user } = useAuth()
@@ -42,8 +43,23 @@ const ManageFood = () => {
         }
     })
 
-    const handleDelete = async (id) => {
-        await mutateAsync(id)
+
+
+    const handleDelete = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "This action cannot be undone!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes !!!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                mutateAsync(id)
+            }
+        });
 
         // axiosSecure.delete(`/food/${id}`)
         //     .then(res => {
