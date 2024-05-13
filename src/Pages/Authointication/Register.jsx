@@ -17,6 +17,10 @@ const Register = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
+        document.title = "NourishNet | Register"
+    }, [])
+
+    useEffect(() => {
         if (user) return navigate('/')
     }, [user])
 

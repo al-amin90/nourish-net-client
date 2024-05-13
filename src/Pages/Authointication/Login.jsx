@@ -14,7 +14,10 @@ const Login = () => {
     const { user, loading, setLoading, singInUser, singInWithGoogle } = useAuth()
     const location = useLocation()
     const navigate = useNavigate()
-    console.log(location);
+
+    useEffect(() => {
+        document.title = "NourishNet | Login"
+    }, [])
 
     useEffect(() => {
         if (user) return navigate('/')
@@ -59,7 +62,7 @@ const Login = () => {
                 toast.error(error?.message)
             })
     }
-    console.log(user, loading);
+
     if (user || loading) return <Loader></Loader>
 
     return (

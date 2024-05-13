@@ -7,17 +7,25 @@ import { TbLayoutCards } from "react-icons/tb";
 import { motion } from 'framer-motion'
 import Lottie from "lottie-react";
 import open from "../assets/avilable.json"
+import Loader from '../utlis/Loader';
 
 const AvilableFoods = () => {
     const [foods, setFoods] = useState(null)
     const [sort, setSort] = useState('')
     const [search, setSearch] = useState('')
     const [layout, setLayout] = useState(false)
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        document.title = "NourishNet | Available Foods"
+    }, [])
 
     useEffect(() => {
         const getData = async () => {
+            setLoading(true)
             const { data } = await axios.get(`${baseURL}/foods?avi=available&sort=${sort}&search=${search}`)
             setFoods(data);
+            setLoading(false)
         };
 
         getData()
@@ -30,8 +38,8 @@ const AvilableFoods = () => {
         setSearch(text)
         e.target.reset()
     }
-    console.log(layout);
 
+    if (loading) return <Loader></Loader>
     return (
         <div>
             <div className='py-4 mb-24 w-[90%] md:w-[93%] font-outfit mx-auto max-w-7xl px-0'>

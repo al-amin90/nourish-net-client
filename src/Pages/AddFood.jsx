@@ -19,14 +19,18 @@ const AddFood = ({ isUpdate }) => {
     const [food, setFood] = useState(null);
     const [loading, setLoading] = useState(true)
 
-    console.log(isUpdate);
+    useEffect(() => {
+        document.title = "NourishNet | Add Food"
+    }, [])
+
+    // console.log(isUpdate);
     useEffect(() => {
         if (isUpdate) {
             setLoading(true)
             axiosSecure.get(`/food/${id}`).then((res) => {
                 setFood(res.data);
                 setStartDate(res.data.expiredDate);
-                console.log(res.data);
+                // console.log(res.data);
                 setLoading(false)
             });
         }
@@ -59,11 +63,11 @@ const AddFood = ({ isUpdate }) => {
             foodQuantity,
             donateUser,
         };
-        console.log(food);
+        // console.log(food);
 
         if (isUpdate) {
             axiosSecure.put(`/food/${id}`, food).then((res) => {
-                console.log(res.data);
+                // console.log(res.data);
                 if (res.data.modifiedCount > 0) {
                     toast.success("Food have been Updated");
                     navigate("/manage");
@@ -72,7 +76,7 @@ const AddFood = ({ isUpdate }) => {
         }
         else {
             axiosSecure.post(`/foods`, food).then((res) => {
-                console.log(res.data);
+                // console.log(res.data);
                 if (res.data.insertedId) {
                     toast.success("Food have been added");
                     navigate("/manage");

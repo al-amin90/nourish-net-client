@@ -17,7 +17,7 @@ const Featured = () => {
             return data;
         }
     })
-    console.log(foods);
+    // console.log(foods);
 
     // useEffect(() => {
     //     const getData = async () => {
@@ -34,7 +34,7 @@ const Featured = () => {
 
                 <div className=' font-mons text-center mt-12 md:mt-20'>
                     <h2 className='font-bold text-4xl mb-3'><span className='text-[#108864]'>Featured</span>  Foods</h2>
-                    <p className='mb-6 text-sm mx-auto w-2/3'>
+                    <p className='mb-6 text-sm mx-auto md:w-2/3'>
                         In this section, we showcase the most abundant and sought-after food items, ensuring that those in need have access to essential sustenance.Here, you'll discover an array of food items generously shared by our community of donors.</p>
                 </div>
 

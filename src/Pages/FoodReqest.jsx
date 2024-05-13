@@ -13,6 +13,10 @@ const FoodReqest = () => {
     const axiosSecure = useAxiosSecure()
     // const [foods, setFoods] = useState()
 
+    useEffect(() => {
+        document.title = "NourishNet | Food Request"
+    }, [])
+
     const { data: foods = [], isLoading } = useQuery({
         queryKey: ["food-request"],
         queryFn: async () => {
@@ -21,7 +25,7 @@ const FoodReqest = () => {
         }
     })
 
-    console.log(foods);
+    // console.log(foods);
     // useEffect(() => {
     //     axiosSecure.get(`/foodss?email=${user.email}&requ=requested`)
     //         .then(res => setFoods(res.data))

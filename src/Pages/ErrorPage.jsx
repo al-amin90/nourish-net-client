@@ -1,10 +1,14 @@
 import { useNavigate, useRouteError } from 'react-router-dom';
 import errorImg from '../assets/error.gif';
+import { useEffect } from 'react';
 
 const ErrorPage = () => {
     const { error } = useRouteError()
     const navigate = useNavigate()
-    console.log(error);
+
+    useEffect(() => {
+        document.title = "NourishNet | Error Page"
+    }, [])
 
     return (
         <div>

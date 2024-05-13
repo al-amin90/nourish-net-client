@@ -14,6 +14,11 @@ const ManageFood = () => {
     const axiosSecure = useAxiosSecure()
     // const [foods, setFoods] = useState()
 
+
+    useEffect(() => {
+        document.title = "NourishNet | Manage Foods"
+    }, [])
+
     const { data: foods = [], isLoading, isError, refetch, error } = useQuery({
         queryKey: ['food-manage'],
         queryFn: async () => {
@@ -21,7 +26,7 @@ const ManageFood = () => {
             return res.data;
         }
     })
-    console.log(foods);
+    // console.log(foods);
 
 
     // useEffect(() => {
@@ -35,7 +40,7 @@ const ManageFood = () => {
     const { mutateAsync } = useMutation({
         mutationFn: async (id) => {
             const { data } = await axiosSecure.delete(`/food/${id}`)
-            console.log(data);
+            // console.log(data);
             return data;
         },
 

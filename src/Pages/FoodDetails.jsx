@@ -3,7 +3,7 @@ import { useLoaderData, useNavigate, useParams } from 'react-router-dom';
 import { GiFruitBowl } from "react-icons/gi";
 import { LuClock } from "react-icons/lu";
 import { LuPartyPopper } from "react-icons/lu";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Modal } from "antd";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -22,6 +22,10 @@ const FoodDetails = () => {
     const axiosSecure = useAxiosSecure()
     const { id } = useParams()
 
+    useEffect(() => {
+        document.title = "NourishNet | Food Details"
+    }, [])
+
 
     const { data = [], refetch, isLoading } = useQuery({
         queryKey: ["food-Details"],
@@ -31,7 +35,7 @@ const FoodDetails = () => {
         }
     })
     const food = data;
-    console.log(data);
+    // console.log(data);
 
 
     const { mutateAsync } = useMutation({
@@ -40,7 +44,6 @@ const FoodDetails = () => {
             return data
         },
         onSuccess: () => {
-            console.log("wow data update");
 
             toast.success("Your Request has Confirmed");
             setModal2Open(false)
