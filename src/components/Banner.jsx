@@ -8,7 +8,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
-
+import { motion } from 'framer-motion'
 
 import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper/modules';
 
@@ -37,8 +37,12 @@ const Banner = () => {
                 <SwiperSlide >
                     <div className="md:h-[calc(100vh-50px)] h-[400px] bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(https://i.postimg.cc/1320PCvG/man-carrying-tray-of-fruits.jpg)` }}>
                         <div className="bg-white/20  md:backdrop-blur-md md:w-1/3 rounded-3xl relative top-1/2 md:left-24 -translate-y-1/2 h-2/3 bg-opacity-60">
-                            <div className="mx-auto h-full w-[90%] md:w-[85%] flex items-center">
-                                <div className=" mt-10 md:mt-0 text-white w-full md:w-auto">
+                            <motion.div
+                                initial={{ y: -250 }}
+                                animate={{ y: -10 }}
+                                className="mx-auto h-full w-[90%] md:w-[85%] flex items-center">
+                                <div
+                                    className=" mt-10 md:mt-0 text-white w-full md:w-auto">
                                     <p className="text-2xl md:text-3xl lg:text-3xl w-11/12 font-bold text-center md:text-left">
                                         Together, Let's  <span className="text-[#25d4a0]">Share</span> Foods Souls!
                                         {/* Sharing Food,  <span className="text-[#25d4a0]">Reducing</span> Waste! */}
@@ -61,14 +65,17 @@ const Banner = () => {
                                 <div>
 
                                 </div>
-                            </div>
+                            </motion.div>
                         </div>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide >
                     <div className="md:h-[calc(100vh-50px)] z-0 h-[400px] bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(https://i.postimg.cc/25Y64nyp/grapes-in-hands.png)` }}>
                         <div className="bg-white/20 md:backdrop-blur-md md:w-1/3 rounded-3xl relative top-1/2 md:left-24 -translate-y-1/2 h-2/3 bg-opacity-60">
-                            <div className="mx-auto h-full w-[90%] md:w-[85%] flex items-center">
+                            <motion.div
+                                initial={{ y: -250 }}
+                                animate={{ y: -10 }}
+                                className="mx-auto h-full w-[90%] md:w-[85%] flex items-center">
                                 <div className=" mt-10 md:mt-0 text-white w-full md:w-auto">
                                     <p className="text-2xl md:text-3xl lg:text-3xl w-11/12 font-bold text-center md:text-left">
                                         Sharing Food,  <span className="text-[#303544]">Reducing</span> Waste!
@@ -91,7 +98,7 @@ const Banner = () => {
                                 <div>
 
                                 </div>
-                            </div>
+                            </motion.div>
                         </div>
                     </div>
                 </SwiperSlide>

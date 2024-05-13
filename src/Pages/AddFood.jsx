@@ -8,6 +8,7 @@ import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { toast } from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../utlis/Loader";
+import { motion } from 'framer-motion'
 
 const AddFood = ({ isUpdate }) => {
     const [startDate, setStartDate] = useState(new Date());
@@ -89,13 +90,17 @@ const AddFood = ({ isUpdate }) => {
         >
             <div className=" flex py-16 justify-center ">
                 <section className="max-w-4xl p-8 mx-auto bg-white/20 backdrop-blur-md rounded-md shadow-md dark:bg-gray-800">
-                    <div className="flex items-center justify-center">
+                    <div
+                        className="flex items-center justify-center">
                         <h2 className="font-bold bg-black/20 px-10 w-fit backdrop-blur-lg py-2 rounded-xl text-4xl text-white text-center mb-3">
                             <span className="">{isUpdate ? "Update" : "Add"}</span> Food
                         </h2>
                     </div>
 
-                    <div className=" mt-10 mb-10">
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className=" mt-10 mb-10">
                         <div className="text-white space-y-2 font-semibold text-base">
                             <div className="avatar">
                                 <div className="w-24 rounded">
@@ -109,7 +114,7 @@ const AddFood = ({ isUpdate }) => {
                                 Email: <span className="font-medium">{user?.email}</span>
                             </h3>
                         </div>
-                    </div>
+                    </motion.div>
 
                     <form onSubmit={handleSubmit}>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4 lg:grid-cols-3">

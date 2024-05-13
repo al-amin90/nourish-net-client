@@ -27,7 +27,7 @@ const FoodReqest = () => {
     if (isLoading) return <Loader></Loader>
     return (
         <div>
-            <section className="container px-4 mx-auto pt-12">
+            <section className="container mb-24 px-4 mx-auto pt-12">
                 <div className="flex items-center gap-x-3">
                     <h2 className="text-lg font-medium text-gray-800 ">food Requests</h2>
 
