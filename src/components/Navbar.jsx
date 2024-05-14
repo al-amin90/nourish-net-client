@@ -142,9 +142,9 @@ const Navbar = () => {
                     <div className="navbar-start lg:hidden">
                         <div className="dropdown">
                             <div tabIndex={0} role="button" className="btn text-white btn-ghost lg:hidden">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 z-40 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                             </div>
-                            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-40 p-2 shadow bg-base-100 rounded-box w-52">
                                 {NavLinks}
                             </ul>
                         </div>
@@ -160,7 +160,7 @@ const Navbar = () => {
                         user ?
                             <div className="navbar-end  text-xl text-white relative">
                                 <MdMarkEmailUnread className="text-xl" />
-                                <p className="text-base ml-3">{user?.email}</p>
+                                <p className="text-sm md:text-base ml-3">{user?.email}</p>
                             </div>
                             :
                             <Link
