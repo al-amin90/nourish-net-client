@@ -5,15 +5,18 @@ import wall from "../assets/wall.png";
 import ToggleBtn from "./ToggleBtn";
 import { IoMdHeart } from "react-icons/io";
 import { useState } from "react";
+import { loadStripe } from "@stripe/stripe-js";
+import DonateModal from "./Modal/DonateModal";
+import useAuth from "../Hooks/useAuth";
+import { Navigate, useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 const DonateNow = () => {
   const [modal2Open, setModal2Open] = useState(false);
   const [price, setPrice] = useState(25);
   const [kitSms, setkitSms] = useState(true);
-
-  console.log(price);
-
-  const handleSubmit = () => {};
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     console.log(e);
@@ -25,6 +28,16 @@ const DonateNow = () => {
       setkitSms(false);
     }
     console.log(kitSms);
+  };
+
+  const handleDonate = () => {
+    console.log("cl;icke");
+    if (!user?.email) {
+      navigate("/login");
+      toast.error("Please Login to donate");
+      return;
+    }
+    setModal2Open(true);
   };
   return (
     <div>
@@ -107,120 +120,15 @@ const DonateNow = () => {
             <div className="flex items-center justify-between gap-3">
               <Button
                 className="py-6  flex-1 justify-center text-white rounded-full flex text-lg font-semibold gap-2 items-center px-4 hover:bg-[#108864] bg-[#25d4a0]"
-                onClick={() => setModal2Open(true)}
+                onClick={() => handleDonate()}
               >
                 Donate Now <IoMdHeart />
               </Button>
-              <Modal
-                centered
-                open={modal2Open}
-                onCancel={() => setModal2Open(false)}
-              >
-                <form className="p-2" onSubmit={handleSubmit}>
-                  <h4 className="text-3xl font-semibold">Checkout</h4>
-                  <h6 className="text-base mt-7 font-semibold">
-                    Billing Details
-                  </h6>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4 lg:grid-cols-4">
-                    <div className="md:col-span-2">
-                      <label
-                        className="text-black font-medium dark:text-gray-200"
-                        htmlFor="username"
-                      >
-                        ● First name
-                      </label>
-                      <input
-                        id="username"
-                        name="firstName"
-                        placeholder="First name"
-                        type="text"
-                        className="block w-full px-4 py-2 mt-1 text-black bg-white border border-[#023022] rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-[#108864] focus:ring-[#108864] focus:ring-opacity-40 dark:focus:border-[#108864] focus:outline-none focus:ring"
-                      />
-                    </div>
-                    <div className="md:col-span-2">
-                      <label
-                        className="text-black font-medium dark:text-gray-200"
-                        htmlFor="username"
-                      >
-                        ● Last name
-                      </label>
-                      <input
-                        id="username"
-                        name="lastName"
-                        placeholder="Last name"
-                        type="text"
-                        className="block w-full px-4 py-2 mt-1 text-black bg-white border border-[#023022] rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-[#108864] focus:ring-[#108864] focus:ring-opacity-40 dark:focus:border-[#108864] focus:outline-none focus:ring"
-                      />
-                    </div>
-
-                    <div className="md:col-span-4">
-                      <label
-                        className="text-black font-medium dark:text-gray-200"
-                        htmlFor="username"
-                      >
-                        ● Street Address
-                      </label>
-                      <input
-                        id="address"
-                        name="address"
-                        type="text"
-                        className="block w-full px-4 py-2 mt-1 text-black bg-white border border-[#023022] rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-[#108864] focus:ring-[#108864] focus:ring-opacity-40 dark:focus:border-[#108864] focus:outline-none focus:ring"
-                      />
-                    </div>
-
-                    <div className="md:col-span-2">
-                      <label
-                        className="text-black font-medium dark:text-gray-200"
-                        htmlFor="username"
-                      >
-                        ● Phone
-                      </label>
-                      <input
-                        id="username"
-                        name="phone"
-                        type="number"
-                        className="block w-full px-4 py-2 mt-1 text-black bg-white border border-[#023022] rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-[#108864] focus:ring-[#108864] focus:ring-opacity-40 dark:focus:border-[#108864] focus:outline-none focus:ring"
-                      />
-                    </div>
-
-                    <div className="md:col-span-2">
-                      <label
-                        className="text-black font-medium dark:text-gray-200"
-                        htmlFor="username"
-                      >
-                        ● Email
-                      </label>
-                      <input
-                        id="username"
-                        name="email"
-                        type="text"
-                        className="block w-full px-4 py-2 mt-1 text-black bg-white border border-[#023022] rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-[#108864] focus:ring-[#108864] focus:ring-opacity-40 dark:focus:border-[#108864] focus:outline-none focus:ring"
-                      />
-                    </div>
-
-                    <div className="md:col-span-4">
-                      <label
-                        className="text-black font-medium dark:text-gray-200"
-                        htmlFor="username"
-                      >
-                        ● Donation Notes (optional)
-                      </label>
-                      <input
-                        id="username"
-                        name="note"
-                        type="text"
-                        className="block w-full px-4 py-2 mt-1 text-black bg-white border border-[#023022] rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-[#108864] focus:ring-[#108864] focus:ring-opacity-40 dark:focus:border-[#108864] focus:outline-none focus:ring"
-                      />
-                    </div>
-                  </div>
-                  <h2 className="text-3xl font-bold mt-8">Payment Details</h2>
-                  <div className="flex items-center justify-end mt-4">
-                    <button className="py-2 bg-[#2BA2FF] px-5 text-base border-2 border-white duration-300 text-white hover:scale-105 hover:-rotate-2 rounded-full flex items-center gap-2 hover:shadow-xl font-semibold">
-                      Donate Now
-                    </button>
-                  </div>
-                </form>
-              </Modal>
+              <DonateModal
+                setModal2Open={setModal2Open}
+                modal2Open={modal2Open}
+                price={price}
+              ></DonateModal>
               <div>
                 <img src={payment} className="w-[300px] " alt="" />
               </div>

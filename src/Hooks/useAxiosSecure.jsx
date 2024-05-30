@@ -1,14 +1,12 @@
 import axios from "axios";
 
 const axiosSecure = axios.create({
-    baseURL: "https://nourish-net-server-eight.vercel.app",
-    withCredentials: true
-})
+  baseURL: "http://localhost:5000",
+  withCredentials: true,
+});
 
 const useAxiosSecure = () => {
-
-
-    return axiosSecure;
+  return axiosSecure;
 };
 
 export default useAxiosSecure;

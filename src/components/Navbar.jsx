@@ -5,6 +5,7 @@ import { IoHome } from "react-icons/io5";
 import { IoMdAdd } from "react-icons/io";
 import { GiFruitBowl } from "react-icons/gi";
 import { VscRequestChanges } from "react-icons/vsc";
+import { FaPersonWalkingDashedLineArrowRight } from "react-icons/fa6";
 import { FaClockRotateLeft } from "react-icons/fa6";
 import { FiUser } from "react-icons/fi";
 import useAuth from "../Hooks/useAuth";
@@ -87,6 +88,18 @@ const Navbar = () => {
         }
       >
         <FaClockRotateLeft className="text-base" /> Food Request
+      </NavLink>
+      <NavLink
+        to="/dashboard"
+        className={({ isActive, isPending }) =>
+          isPending
+            ? "pending"
+            : isActive
+            ? "flex items-center gap-2 border-b-2 mr-3 px-2 text-base text-[#b7ffe9] border-[#b7ffe9] font-bold"
+            : "flex items-center gap-2 text-base mr-3 px-2 hover:border-b-2  hover:text-[#b7ffe9] "
+        }
+      >
+        <FaPersonWalkingDashedLineArrowRight className="text-base" /> Dashboard
       </NavLink>
     </>
   );
