@@ -1,6 +1,6 @@
 # Welcome to NourishNet
 
-NourishNet is a revolutionary platform designed to connect communities with surplus food to those in need. Our mission is to reduce food waste while ensuring that everyone has access to nutritious meals. With NourishNet, individuals and organizations can easily share surplus food and find nearby recipients in need, fostering a more sustainable and compassionate society.
+NourishNet is a revolutionary platform designed to connect communities with surplus food to those in need. 
 
 ## Live Site Link-
 
