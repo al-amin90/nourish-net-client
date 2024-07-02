@@ -52,9 +52,9 @@ on access there data, the server secure by JWT and client side has Private Route
 
 ## Technologies Used
 
-Frontend: React.js, TailwindCSS for building the user interface.
-Backend: Node.js and Express.js for handling server-side logic and APIs.
-Database: MongoDB for storing user data and travel destinations.
-Authentication: firebase for user authentication & for security JSON Web Tokens (JWT).
+- Frontend: React.js, TailwindCSS for building the user interface.
+- Backend: Node.js and Express.js for handling server-side logic and APIs.
+- Database: MongoDB for storing user data and travel destinations.
+- Authentication: firebase for user authentication & for security JSON Web Tokens (JWT).
 
 
